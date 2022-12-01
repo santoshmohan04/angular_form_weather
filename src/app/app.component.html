@@ -1,0 +1,130 @@
+<div class="container">
+  <div class="weather">
+    <span class="title">Weather App</span>
+    <br />
+    <form [formGroup]="weatherForm" (ngSubmit)="onSubmit(weatherForm)">
+      <input
+        type="text"
+        placeholder="city"
+        formControlName="city"
+        name="city"
+      />
+      &nbsp; &nbsp; &nbsp;&nbsp;
+      <input
+        type="text"
+        placeholder="Country"
+        formControlName="country"
+        name="country"
+      />
+      <button class="getweather" type="submit" [disabled]="weatherForm.invalid">
+        Submit
+      </button>
+    </form>
+
+    <div class="displayweather" *ngIf="weatherData">
+      <div class="maincard">
+        <span class="cardtitle">
+          {{ weatherData.name }} , {{ weatherData.sys.country }}. Weather
+        </span>
+        <span class="cardsubtitle"> As of {{ currentDate }} </span>
+
+        <h1>
+          {{ temperature }}
+          <sup>o</sup>
+        </h1>
+        <span class="weather-main">{{ weatherData.weather[0].main }}</span>
+        <img class="weather-icon" src="{{ iconurl }}" alt="weather-icon" />
+        <span class="weather-description">
+          {{ weatherData.weather[0].description }}
+        </span>
+      </div>
+      <div class="weatherdetails">
+        <div class="section1">
+          <table>
+            <tbody>
+              <tr>
+                <td>
+                  <h4>High/Low</h4>
+                </td>
+                <td>
+                  <span>
+                    {{ temp_max }}/
+                    {{ temp_min }}
+                  </span>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <h4>Humidity</h4>
+                </td>
+                <td>
+                  <span>{{ weatherData.main.humidity }} %</span>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <h4>Pressure</h4>
+                </td>
+                <td>
+                  <span>{{ weatherData.main.pressure }} hPa</span>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <h4>Visibility</h4>
+                </td>
+                <td>
+                  <span>{{ weatherData.visibility / 1000 }} Km</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="section2">
+          <table>
+            <tr>
+              <td>
+                <h4>Wind</h4>
+              </td>
+              <td>
+                <span>{{ wind_speed }} km/hr</span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h4>Wind Direction</h4>
+              </td>
+              <td>
+                <span>
+                  {{ weatherData.wind.deg }}
+                  <sup>o</sup> deg
+                </span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h4>Sunrise</h4>
+              </td>
+              <td>
+                <span>
+                  {{ sunrise }}
+                </span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h4>Sunset</h4>
+              </td>
+              <td>
+                <span>
+                  {{ sunset }}
+                </span>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
